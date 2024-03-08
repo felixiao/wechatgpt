@@ -42,7 +42,7 @@ def handler_group_msg(msg):
     try:
         cmsg = WechatMessage(msg, True)
     except NotImplementedError as e:
-        logger.debug("[WX]group message {} skipped: {}".format(msg["MsgId"], e))
+        logger.debug(f"[WX]group message {msg['MsgId']}: {msg} skipped: {e}")
         return None
     WechatChannel().handle_group(cmsg)
     return None
@@ -52,7 +52,7 @@ def _check(func):
     def wrapper(self, cmsg: ChatMessage):
         msgId = cmsg.msg_id
         if msgId in self.receivedMsgs:
-            logger.info("Wechat message {} already received, ignore".format(msgId))
+            # logger.info("Wechat message {} already received, ignore".format(msgId))
             return
         self.receivedMsgs[msgId] = True
         create_time = cmsg.create_time  # 消息时间戳
@@ -73,15 +73,15 @@ def _check(func):
 def qrCallback(uuid, status, qrcode):
     # logger.debug("qrCallback: {} {}".format(uuid,status))
     if status == "0":
-        try:
-            from PIL import Image
+        # try:
+        #     # from PIL import Image
 
-            img = Image.open(io.BytesIO(qrcode))
-            _thread = threading.Thread(target=img.show, args=("QRCode",))
-            _thread.setDaemon(True)
-            _thread.start()
-        except Exception as e:
-            pass
+        #     # img = Image.open(io.BytesIO(qrcode))
+        #     # _thread = threading.Thread(target=img.show, args=("QRCode",))
+        #     # _thread.setDaemon(True)
+        #     # _thread.start()
+        # except Exception as e:
+        #     pass
 
         import qrcode
 

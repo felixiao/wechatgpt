@@ -97,6 +97,7 @@ class Tool(Plugin):
                     if query.startswith(tool_name):
                         use_one_tool = True
                         query = query[len(tool_name):]
+                        logger.info(f"[tool]: {tool_name} 请求内容为：{query}")
                         break
 
                 # Don't modify bot name
@@ -106,6 +107,7 @@ class Tool(Plugin):
                 logger.debug("[tool]: just-go")
                 try:
                     if use_one_tool:
+                        logger.info()
                         _func, _ = main_tool_register.get_registered_tool()[tool_name]
                         tool = _func(**self.app_kwargs)
                         _reply = tool.run(query)

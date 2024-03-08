@@ -449,7 +449,7 @@ def send_image(self, fileDir=None, toUserName=None, mediaId=None, file_=None):
     return ReturnValue(rawResponse=r)
 
 def send_video(self, fileDir=None, toUserName=None, mediaId=None, file_=None):
-    logger.debug('Request to send a video(mediaId: %s) to %s: %s' % (
+    logger.info('Request to send a video(mediaId: %s) to %s: %s' % (
         mediaId, toUserName, fileDir))
     if fileDir or file_:
         if hasattr(fileDir, 'read'):
@@ -485,6 +485,7 @@ def send_video(self, fileDir=None, toUserName=None, mediaId=None, file_=None):
         'Content-Type': 'application/json;charset=UTF-8', }
     r = self.s.post(url, headers=headers,
         data=json.dumps(data, ensure_ascii=False).encode('utf8'))
+    logger.info("==============finish send_video==============")
     return ReturnValue(rawResponse=r)
 
 def send(self, msg, toUserName=None, mediaId=None):

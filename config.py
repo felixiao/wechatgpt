@@ -11,7 +11,7 @@ from common.log import logger
 # 此处的配置值无实际意义，程序不会读取此处的配置，仅用于提示格式，请将配置加入到config.json中
 available_setting = {
     # openai api配置
-    "open_ai_api_key": "",  # openai api key
+    "open_ai_api_key": "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",  # openai api key
     # openai apibase，当use_azure_chatgpt为true时，需要设置对应的api base
     "open_ai_api_base": "https://api.openai.com/v1",
     "proxy": "",  # openai使用的代理
@@ -24,6 +24,34 @@ available_setting = {
     "single_chat_prefix": ["bot", "@bot"],  # 私聊时文本需要包含该前缀才能触发机器人回复
     "single_chat_reply_prefix": "[bot] ",  # 私聊时自动回复的前缀，用于区分真人
     "single_chat_reply_suffix": "",  # 私聊时自动回复的后缀，\n 可以换行
+    "single_chat_prefix_and_reply_per_user":{ # 指定用户的私聊前缀和回复前缀
+        "我大宝宝":{
+            "keyword":["宝宝","老公"],
+            "reply_prefix":"宝宝",
+            "reply_suffix":"",
+            "allow_voice":True},
+        "费月桐":{
+            "keyword":["哥哥"],
+            "reply_prefix":"桐桐",
+            "reply_suffix":"\n-----回复完毕-----",
+            "allow_voice":True},
+        "Felix":{
+            "keyword":["Felix","小费"],
+            "reply_prefix":"-----测试-----",
+            "reply_suffix":"\n-----回答完毕-----",
+            "allow_voice":True},
+        "武斐":{
+            "keyword":"宝宝",
+            "reply_prefix":"宝宝",
+            "reply_suffix":"",
+            "allow_voice":True},
+        "费广正":{
+            "keyword":["费霄","gpt"],
+            "reply_prefix":"-----自动回复-----\n",
+            "reply_suffix":"",
+            "allow_voice":True}
+    },
+    "single_chat_white_list":False,
     "group_chat_prefix": ["@bot"],  # 群聊时包含该前缀则会触发机器人回复
     "group_chat_reply_prefix": "",  # 群聊时自动回复的前缀
     "group_chat_reply_suffix": "",  # 群聊时自动回复的后缀，\n 可以换行
